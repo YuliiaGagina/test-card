@@ -1,23 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import createNewNumber from 'helpers/mathematicOperations';
-
-import storage from 'helpers/storage';
-const Card = tittle => {
-  const [pressed, setPressed] = useState(() => storage.load('pressed-button'));
-  const textForButton = pressed ? 'FOLLOWING' : 'FOLLOWER';
-  const number = createNewNumber('100500');
-  const newAmountOfFollowers = pressed ? number.replace('500', '501') : number;
-  useEffect(() => {
-    storage.save('pressed-button', pressed);
-  }, [pressed]);
+import React from 'react';
+import { createNewNumber } from 'helpers/mathematicOperations';
+import { WrapOfCard, UpperImg, UserImg, Text, Logo } from './Card.styled';
+import upper from '../../images/upper.png';
+import userPhoto from '../../images/user.png';
+import logo from '../../images/logo.png';
+import styles from './Card.module.css';
+const Card = ({ user, onUserFollowingChanged }) => {
   return (
-    <div>
-      <p>777 TWEETS</p>
-      <p>{newAmountOfFollowers} FOLLOWERS</p>
-      <button type="button" onClick={() => setPressed(!pressed)}>
-        {textForButton}
-      </button>
-    </div>
+    <section>
+      <WrapOfCard key={user.id}>
+        <Logo src={logo} alt="logo" />
+        <UpperImg src={upper} width="308" alt="upper-images" />
+        <UserImg src={userPhoto} width="380" alt="user-img" />
+
+        <Text>{user.user}</Text>
+
+        <Text>{user.tweets} TWEETS</Text>
+        <Text>{createNewNumber(String(user.followers))} FOLLOWERS</Text>
+        <button
+          className={user.pressed === true ? styles.following : styles.follow}
+          type="button"
+          onClick={() => {
+            onUserFollowingChanged(user);
+          }}
+        >
+          {user.pressed === true ? 'FOLLOWING' : 'FOLLOWER'}
+        </button>
+      </WrapOfCard>
+    </section>
   );
 };
 
