@@ -1,10 +1,14 @@
 import React from 'react';
+
 import { createNewNumber } from 'helpers/mathematicOperations';
+
 import { WrapOfCard, UpperImg, UserImg, Text, Logo } from './Card.styled';
+import styles from './Card.module.css';
+
 import upper from '../../images/upper.png';
 import userPhoto from '../../images/user.png';
 import logo from '../../images/logo.png';
-import styles from './Card.module.css';
+
 const Card = ({ user, onUserFollowingChanged }) => {
   return (
     <section>

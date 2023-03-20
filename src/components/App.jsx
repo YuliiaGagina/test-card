@@ -1,34 +1,11 @@
 import Card from './Card/Card';
 import { useState, useEffect } from 'react';
+
 import { Section } from './App.styled';
 
 import storage from 'helpers/storage';
+import USER_INITIAL_DATA from '../users.json';
 
-const USER_INITIAL_DATA = [
-  {
-    id: 1,
-    user: 'Kate Roshe Pisk',
-    tweets: 777,
-    followers: 100500,
-
-    pressed: false,
-  },
-  {
-    id: 2,
-    user: 'Elon Reeve Musk',
-    tweets: 777,
-    followers: 120111,
-
-    pressed: false,
-  },
-  {
-    id: 3,
-    user: 'Irina Data Musk',
-    tweets: 777,
-    followers: 100555,
-    pressed: false,
-  },
-];
 export const App = () => {
   const [users, setUsers] = useState(
     () => storage.load('users') || USER_INITIAL_DATA
